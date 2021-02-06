@@ -1,5 +1,6 @@
 import React, { useState }from 'react';
 import ReactDOM from 'react-dom';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 function Login() {
   const [user, setUser] = useState("");
@@ -11,9 +12,20 @@ function Login() {
   const handlePasswordChange = event => {
     setUser({ ...user, password: event.target.value });
   };
-  /*Code for Axios Post will go here*/
 
   const handleSubmit = event => {
+      /*Code for Axios Post will go here*/
+      event.preventDefault();
+      axiosWithAuth()
+        .post("/auth/login", user)
+        .then((res) => {
+          localStorage.setItem("token", res.data.token);
+//Need more info returned from login, at least user id so I can retrieve other user data
+        })
+        .catch((err) => {
+          console.log("Login error: ", err);
+          localStorage.removeItem("token");
+        });
 
     console.log(user.username);
     console.log(user.password);

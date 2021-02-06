@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import './App.css';
 import Login from './components/Login';
 
+import UserContext from './contexts/UserContext';
 import PotluckContext from './contexts/PotluckContext';
+import FoodContext from './contexts/FoodContext';
 import PrivateRoute from './components/PrivateRoute';
 
 
