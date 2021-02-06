@@ -1,29 +1,35 @@
-import React from 'react';
-import './App.css';
-import Login from './Login'
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
+import './App.css';
+import Login from './components/Login';
 
-
-
-
+import PotluckContext from './contexts/PotluckContext';
+import PrivateRoute from './components/PrivateRoute';
 
 
 function App() {
-
+  const [isLoggedIn, setIsLoggedIn] =useState(localStorage.getItem("UserToken") ? true : false);
+  const [user, setUser] = useState("");
 
 
 
   return (
-    <div className="App">
-      <Login />
+    <UserContext.Provider>
+      <PotluckContext.Provider>
+        <FoodContext.Provider>
+        <div className="App">
+          <Login />
 
-      <Link to="/register"><button>
-        Register
-        </button>
-        </Link>
+          <Link to="/register"><button>
+            Register
+            </button>
+            </Link>
 
-      </div>
+          </div>
+          </FoodContext.Provider>
+        </PotluckContext.Provider>
+      </UserContext.Provider>
   );
 }
 
