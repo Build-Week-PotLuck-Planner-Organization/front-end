@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 function Register () {
     const [user, setUser] = useState("");
-
+    const history = useHistory();
     const handleNameChange = event => {
       setUser({ ...user, username: event.target.value });
     };
@@ -11,9 +12,18 @@ function Register () {
     const handlePasswordChange = event => {
       setUser({ ...user, password: event.target.value });
     };
-    /*Code for Axios Post will go here*/
 
     const handleSubmit = event => {
+      /*Code for Axios Post will go here*/
+      event.preventDefault();
+      console.log(user);
+
+      axiosWithAuth()
+      .post("/auth/register", user)
+      .then((res) => {
+        console.log("Register response: ", res.data);
+        history.push("/");
+      })
 
       console.log(user.username);
       console.log(user.password);

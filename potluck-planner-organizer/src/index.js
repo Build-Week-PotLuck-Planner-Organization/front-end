@@ -3,17 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Register from "./Register"
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <BrowserRouter>
-
-    <Switch>
-    <Route exact path="/" component={App} />
-    <Route path="/register" component={Register} />
-    </Switch>
-
+    <App />
   </BrowserRouter>,
   document.getElementById('root')
 );
